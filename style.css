@@ -1,0 +1,306 @@
+/* ============================================
+   Kartu Ucapan Hari Guru
+   Pure HTML + CSS
+   Inspirasi: Valentine's Card by Lena Stanley
+   Tema: Soft pastel dengan aksen apresiasi
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600&display=swap');
+
+:root {
+  /* Warna utama - soft pink/peach dengan sentuhan hangat */
+  --bg: #ff8fab;
+  --card: #ffb3c1;
+  --cloud-light: #fff0f3;
+  --cloud-mid: #ffccd5;
+  --cloud-dark: #ffb3c1;
+  --heart-left: #ff4d6d;
+  --heart-right: #c9184a;
+  --text: #800f2f;
+  --hint: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ff8fab 0%, #ff758f 50%, #ff4d6d 100%);
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+
+/* Wrapper */
+.happy-teachers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Kartu utama */
+.teachers-day-card {
+  position: relative;
+  width: 400px;
+  height: 300px;
+  background-color: var(--card);
+  overflow: hidden;
+  border: 10px solid #ffffff;
+  border-radius: 16px;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.25),
+    0 0 0 4px rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.teachers-day-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.3),
+    0 0 0 4px rgba(255, 255, 255, 0.4);
+}
+
+/* Layer awan (before & after + .clouds) */
+.teachers-day-card::before {
+  content: "";
+  position: absolute;
+  background-color: var(--cloud-dark);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  top: 140px;
+  left: -25px;
+  box-shadow:
+    60px 20px var(--cloud-dark),
+    130px 10px var(--cloud-dark),
+    190px 20px var(--cloud-dark),
+    260px -5px var(--cloud-dark),
+    340px 20px var(--cloud-dark);
+  z-index: 1;
+}
+
+.teachers-day-card::after {
+  content: "";
+  position: absolute;
+  background-color: var(--cloud-mid);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  top: 160px;
+  left: -40px;
+  box-shadow:
+    50px 20px var(--cloud-mid),
+    120px 40px var(--cloud-mid),
+    200px 15px var(--cloud-mid),
+    260px 30px var(--cloud-mid),
+    330px 30px var(--cloud-mid),
+    380px 10px var(--cloud-mid);
+  z-index: 2;
+}
+
+.clouds {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: var(--cloud-light);
+  z-index: 5;
+  top: 210px;
+  left: -20px;
+  box-shadow:
+    55px 30px var(--cloud-light),
+    125px 10px var(--cloud-light),
+    175px 20px var(--cloud-light),
+    250px 10px var(--cloud-light),
+    320px 5px var(--cloud-light),
+    380px 10px var(--cloud-light);
+}
+
+/* Container hati */
+.hearts {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Posisi & animasi masing-masing hati */
+.heartOne {
+  position: absolute;
+  left: 100px;
+  top: 250px;
+  animation: float-up 4s linear forwards 0.8s;
+}
+
+.heartTwo {
+  position: absolute;
+  left: 270px;
+  top: 230px;
+  animation: float-up 5s linear forwards 1.6s;
+}
+
+.heartThree {
+  position: absolute;
+  left: 85px;
+  top: 415px;
+  animation: float-up 5s linear forwards 2.8s;
+}
+
+.heartFour {
+  position: absolute;
+  left: 320px;
+  top: 380px;
+  animation: float-up-long 9s linear infinite 3.2s;
+}
+
+.heartFive {
+  position: absolute;
+  left: 150px;
+  top: 400px;
+  animation: float-up-long 13s linear infinite 4s;
+}
+
+/* Bentuk hati (kiri & kanan) */
+.right-side::before,
+.right-side::after {
+  position: absolute;
+  content: "";
+  transform-origin: left;
+  animation: beat 1s ease infinite;
+}
+
+.right-side::before {
+  border-radius: 50% 50% 50% 0;
+  width: 21px;
+  height: 20px;
+  background-color: var(--heart-right);
+  left: -0.26px;
+}
+
+.right-side::after {
+  height: 0;
+  width: 0;
+  border-bottom: 10px solid transparent;
+  border-left: 15px solid var(--heart-right);
+  top: 19px;
+  left: -0.26px;
+}
+
+.left-side::before,
+.left-side::after {
+  position: absolute;
+  content: "";
+  transform-origin: right;
+  animation: beat 1s ease infinite;
+}
+
+.left-side::before {
+  border-radius: 50% 50% 0 50%;
+  width: 20px;
+  height: 20px;
+  left: -20.7px;
+  background-color: var(--heart-left);
+}
+
+.left-side::after {
+  height: 0;
+  width: 0;
+  left: -15px;
+  border-bottom: 10px solid transparent;
+  border-right: 15px solid var(--heart-left);
+  top: 19px;
+}
+
+/* Animasi */
+@keyframes beat {
+  0%, 100% { transform: rotateY(0); }
+  50% { transform: rotateY(-45deg); }
+}
+
+@keyframes float-up {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-220px); opacity: 0.85; }
+}
+
+@keyframes float-up-long {
+  0% { transform: translateY(0); opacity: 0.9; }
+  100% { transform: translateY(-480px); opacity: 0; }
+}
+
+/* Teks (halaman 1) */
+.text {
+  position: absolute;
+  color: var(--text);
+  font-size: 32px;
+  font-family: 'Pacifico', cursive;
+  line-height: 1.15;
+  text-align: center;
+  width: 380px;
+  left: 10px;
+  z-index: 10;
+  top: 95px;
+  transition: all 0.35s ease;
+  text-shadow: 0 2px 8px rgba(128, 15, 47, 0.15);
+}
+
+/* Halaman 2: pesan motivasi saat hover */
+.text:hover span {
+  display: none;
+}
+
+.text:hover::before {
+  content: "Guru adalah pahlawan tanpa tanda jasa. Terima kasih atas ilmu, kesabaran, dan kasih sayang yang selalu engkau berikan. Semoga selalu sehat, bahagia, dan diberkati!";
+  font-size: 18px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  line-height: 1.45;
+  display: block;
+  padding: 0 18px;
+  color: var(--text);
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Petunjuk hover */
+.hover-hint {
+  color: var(--hint);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: center;
+  opacity: 0.9;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsif sederhana */
+@media (max-width: 480px) {
+  .teachers-day-card {
+    width: 320px;
+    height: 260px;
+  }
+
+  .text {
+    font-size: 26px;
+    width: 300px;
+    left: 10px;
+    top: 80px;
+  }
+
+  .text:hover::before {
+    font-size: 15px;
+    padding: 0 12px;
+  }
+}
